@@ -12,7 +12,7 @@ class GetPokemonsButton extends Component {
         onPress={ this.props.getPokemons }
       >
         <Text style={{fontFamily: "PressStart2P-Regular", color: "#263238" }}>
-          Get Pokemons
+          Get Pokemon
         </Text>
       </Button>
     )

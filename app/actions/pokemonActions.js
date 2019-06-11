@@ -7,7 +7,7 @@ export function getPokemons(nextUrl, paramaters) {
   const url = nextUrl ? nextUrl : config.get_pokemons_endpoint
   const params = nextUrl ? {} : paramaters
   return (dispatch, getState) => {
-    // if response don not have nextUrl built the url with config params
+    // if response does not have nextUrl built the url with config params
     // passed from homeContainer to actions
     return apiClient.get(url, params).then(resp => {
       // concat new result batch to existing resources to reduce payload

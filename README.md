@@ -8,7 +8,7 @@ An example of React Native application with Redux state manager
 
 ## PokeApi
 
-Thanks to public API's of pokeApi you can get all the pokemon data you want
+PokeAPI is used to obtain all the images and information of pokemon.
 
 https://pokeapi.co/
 
@@ -27,65 +27,46 @@ If you want to restart it :
 $ npm start react-native
 ```
 
+## Bugs I ran into when setting up the project
+When setting up the project, I ran into quite a few bugs
+The first was a conflict with the target SDK. Lower SDK's don't support runtime permissions as mentioned here (https://stackoverflow.com/questions/45163008/android-failed-to-finalize-session-26-new-target-sdk-22-doesnt-support-runti)
+The solution is to change the targetSdkVersion specified in the ./android/app/build.gradle file
+For this project I had to update it to version 28
 
-## Starting a new React Native Project
+Unfortunately the newer SDK version doesn't come with clearTextSupport which causes the error "Unable to load script from assets index.android.bundle"
+As discovered here (https://stackoverflow.com/questions/44446523/unable-to-load-script-from-assets-index-android-bundle-on-windows) the solution is to add the line android:usesCleartextTraffic="true" to the AndroidManifest.xml file
 
-If you want to built your own app from ground you can follow the below steps :
+Additional errors that may be related to the incompatible SDK version included:
+java.io.IOException: Could not delete path '_____' 
+This source (https://stackoverflow.com/questions/50798533/java-io-ioexception-could-not-delete-path-c-users-nirma-language-app-build-ge) suggests that it does not have permissions to delete the temporary folder. They recommend deleting it manually which worked for me. This happened several times so don't worry if you have to delete multiple folders
 
-```
-// starters
-$ brew install node
-$ brew install watchman
-$ npm install -g react-native-cli
-
-// brew install is no longer working for adroid-sdk therefore, tap cask via homebrew
-brew cask install android-sdk
-
-```
-For the web developers who wants quick virtual device setup Genymotion is life saver
-In order to get quick emulator :
-
-```
-download and install Genymotion.
-open Genymotion. It might ask you to install VirtualBox unless you already have it.
-create a new emulator and start it.
-to bring up the developer menu press ⌘+M
-```
-```
-//  install redux
-$ npm install --save react-redux
-$ npm install --save redux-logger	
-```
+Unable to resolve module 'redux' ... Module does not exist in the module map
+I'm still not sure why this happened. I checked package.json and redux was listed as a dependency
+After some searching (https://github.com/facebook/react-native/issues/18931) a comment here mentioned installing redux fixes their issue
+running 'npm install redux' fixes the issue
 
 ## Adding Google fonts for android app
-Download .tff and put it into your React-Native project directory
+The .tff files were obtained from Google fonts.
+The list of fonts in this project are:
+  Aldrich-Regular
+  AntDesign
+  Entypo
+  EvilIcons
+  Feather
+  FontAwesome
+  Foundation
+  Ionicons
+  MaterialCommunityIcons
+  MaterialIcons
+  Octicons
+  PressStart2P-Regular
+  Roboto_medium
+  rubicon-icon-font
+  SimpleLineIcons
+  Zocial
 
-```
-./assets/fonts/
-```
+## Demonstration
+![](/screenshot/Demonstration.gif)
 
-Add the following line in your package.json
-
-```
-"rnpm": {
-  "assets": ["./assets/fonts"]
-}
-```
-Run in the terminal from your project directory
-
-```
-$ react-native link
-```
-
-In order to use it declare this way in your styles
-
-```
-fontFamily: 'your-font-name'
-```
-Dont forget to run react-native run-android command and package your app again to reflect changes !
-
-## TO-DO
-
-* Below style and color guide will be implemented 
-https://codepen.io/Sercan/pen/aVGGzq
-
+## This project is originally done by: Sercanesen
+This is a fork of Sercanesen's pokedex project. I take no credit in their creative work.
